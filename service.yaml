@@ -15,7 +15,7 @@ spec:
   spec:
    containers:
    - image: nginx
-    name: ellurukalyan/newrepo:latest
+     name: ellurukalyan/newrepo:latest
 
 ---
 apiVersion: v1
