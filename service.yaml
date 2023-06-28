@@ -1,34 +1,41 @@
+# jenkins-deployment.yaml
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: jenkins-deployment
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
-      app: nginx
+      app: jenkins
   template:
     metadata:
       labels:
-        app: nginx
+        app: jenkins
     spec:
       containers:
-      - name: nginx
-        image: ellurukalyan/spinnakernginx:latest1.15
+      - name: jenkins
+        image: jenkins/jenkins:lts
         ports:
-        - containerPort: 80
+        - containerPort: 8080
+        - containerPort: 50000
+
 
 ---
+
+# jenkins-service.yaml
 
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-service
+  name: jenkins-service
 spec:
   selector:
-    app: nginx
+    app: jenkins
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 80
+      targetPort: 8080
   type: LoadBalancer
+
